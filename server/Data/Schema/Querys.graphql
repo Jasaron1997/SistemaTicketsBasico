@@ -1,0 +1,18 @@
+type Query {
+  
+   getTickets:[Tickets]
+
+  getTicket(id:ID):Tickets
+
+  
+  getPersonales:[Personales]
+
+  getPersonal(id:ID):Personales
+  
+
+  getEstados:[Estados]
+
+  getEstado(id:ID):Estados
+
+
+}

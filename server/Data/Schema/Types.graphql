@@ -1,0 +1,33 @@
+
+type Tickets {
+   id: ID
+Actividad: String
+color: String
+Ticket: Int
+FechaSolicitud:String
+FechaIncio: String
+Observaciones: String
+Reportado: [Personales]
+Realizado: [Personales]
+Estado: String
+Finalizado: String
+}
+
+
+type Personales {
+    id: ID
+    Nombre: String
+	  Dependencia: String
+	  RealizarTareas:Int
+    Eliminado: Int
+   
+}
+
+type Estados {
+    id: ID
+    Nombre: String
+    Descripcion: String
+	  color: String
+    Eliminado: Int
+}
+

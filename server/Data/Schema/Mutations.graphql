@@ -1,0 +1,14 @@
+type Mutation {
+
+CreateTickets(input:TicketsInput):Tickets
+UpdateTickets(input:TicketsInput):Tickets
+DeleteTickets(id:ID):String
+
+CreatePersonal(input:PersonalesInput):Personales
+UpdatePersonal(input:PersonalesInput):Personales
+DeletePersonal(id:ID):String
+
+CreateEstado(input:EstadosInput):Estados
+UpdateEstado(input:EstadosInput):Estados
+DeleteEstado(id:ID):String
+}

@@ -1,0 +1,32 @@
+
+input TicketsInput {
+id: ID
+Actividad: String
+Ticket: Int
+FechaSolicitud:String,
+FechaIncio: String
+Observaciones: String
+Reportado: [PersonalesInput]
+Realizado: [PersonalesInput]
+Estado: String
+Finalizado: String
+}
+
+
+input PersonalesInput {
+    id: ID
+    Nombre: String
+	Dependencia: String
+	RealizarTareas:Int
+    Eliminado: Int
+   
+}
+
+input EstadosInput {
+    id: ID
+    Nombre: String
+    Descripcion: String
+	  color: String
+    Eliminado: Int
+}
+
