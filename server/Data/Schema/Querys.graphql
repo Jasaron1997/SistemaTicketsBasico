@@ -5,7 +5,7 @@ type Query {
   getTicket(id:ID):Tickets
 
   
-  getPersonales:[Personales]
+  getPersonales(tareas:Int):[Personales]
 
   getPersonal(id:ID):Personales
   

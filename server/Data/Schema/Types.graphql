@@ -5,11 +5,11 @@ Actividad: String
 color: String
 Ticket: Int
 FechaSolicitud:String
-FechaIncio: String
+FechaInicio: String
 Observaciones: String
 Reportado: [Personales]
 Realizado: [Personales]
-Estado: String
+Estado: [Estados]
 Finalizado: String
 }
 
@@ -27,7 +27,7 @@ type Estados {
     id: ID
     Nombre: String
     Descripcion: String
-	  color: String
+	  Color: String
     Eliminado: Int
 }
 

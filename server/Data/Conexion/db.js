@@ -20,11 +20,11 @@ const ticketsSchema = new Schema({
 	Actividad: String,
 	Ticket: Number,
 	FechaSolicitud:Date,
-	FechaIncio: Date,
+	FechaInicio: Date,
     Observaciones: String,
     Reportado: Array,
     Realizado: Array,
-    Estado: String,
+    Estado: Array,
     Finalizado: Date
 
 });
@@ -39,7 +39,7 @@ const personalesSchema = new Schema({
 const estadosSchema=new Schema ({
     Nombre: String,
     Descripcion: String,
-	color: String,
+	Color: String,
     Eliminado: Number
 })
 

@@ -1,26 +1,48 @@
 import mongoose from 'mongoose';
 import { rejects } from 'assert';
-import {usuarios,permisos,roles} from '../Conexion/db';
-const ObjectId=mongoose.Types.ObjectId;
+import { personales,estados } from '../Conexion/db';
+const ObjectId = mongoose.Types.ObjectId;
 
+export const types = {
+	Tickets: {
+		Reportado: async ({ Reportado }) => {
+			let ids;
+			let ReportadoDate;
 
-export const types={
-    Usuarios: {
-    Rol: async ({ Rol }) => {
-           let ids
-           let RolesDate
-     
-      try {
-        ids = Rol ? Rol.map(Roles => ObjectId(Roles.id)) : []
-         RolesDate = ids.length > 0
-          ? await roles.find({ _id: { $in: ids } }          )
-          : []
-      
-      } catch (error) {
-        console.error(error)
-      }
+			try {
+				ids = Reportado ? Reportado.map((Reportados) => ObjectId(Reportados.id)) : [];
+				ReportadoDate = ids.length > 0 ? await personales.find({ _id: { $in: ids } }) : [];
+			} catch (error) {
+				console.error(error);
+			}
 
-      return RolesDate
-    }
-  }
-}
+			return ReportadoDate;
+		},
+		Realizado: async ({ Realizado }) => {
+			let ids;
+			let RealizadoDate;
+
+			try {
+				ids = Realizado ? Realizado.map((Realizados) => ObjectId(Realizados.id)) : [];
+				RealizadoDate = ids.length > 0 ? await personales.find({ _id: { $in: ids } }) : [];
+			} catch (error) {
+				console.error(error);
+			}
+
+			return RealizadoDate;
+    },
+    Estado: async ({ Estado }) => {
+			let ids;
+			let EstadoDate;
+
+			try {
+				ids = Estado ? Estado.map((Estados) => ObjectId(Estados.id)) : [];
+				EstadoDate = ids.length > 0 ? await estados.find({ _id: { $in: ids } }) : [];
+			} catch (error) {
+				console.error(error);
+			}
+
+			return EstadoDate;
+		},
+	}
+};
