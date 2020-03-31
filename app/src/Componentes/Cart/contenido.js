@@ -19,7 +19,7 @@ class contenido extends Component {
 		const {Color}=this.props.Estado[0];
 		return (
 			<div className="col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
-				<div className={`card text-white bg-${Color} mb-3`}>
+				<div className={`card text-white mb-3`} style={{ background:Color}}>
 					<div className="card-header">
 						T-{Ticket} {Estado[0].Nombre}
 					</div>
@@ -27,17 +27,17 @@ class contenido extends Component {
 						<h5 className="card-title">{Actividad}</h5>
 						<p className="card-text">{Observaciones}</p>
 						<ul className="list-group list-group-flush">
-							<li className={`list-group-item  bg-${Color}`}>
+							<li className={`list-group-item `} style={{ background:Color}}>
 							{'Solicitud: '}<Moment format="DD/MM/YYYY HH:mm">
 									{new Date(Number(FechaSolicitud)).toISOString()}
 								</Moment>
 							</li>
-							<li className={`list-group-item  bg-${Color}`}>
+							<li className={`list-group-item`} style={{ background:Color}}>
 								{`Inicio: `}<Moment format="DD/MM/YYYY HH:mm">
 									{new Date(Number(FechaInicio)).toISOString()}
 								</Moment>
 							</li>
-							<li className={`list-group-item  bg-${Color}`}>
+							<li className={`list-group-item`} style={{ background:Color}}>
 								{`Finalizado: `}<Moment format="DD/MM/YYYY HH:mm">
 									{new Date(Number(Finalizado)).toISOString()}
 								</Moment>

@@ -5,7 +5,7 @@ class personal extends Component {
 	render() {
 	
 		return (
-                        	<li className={`list-group-item  bg-${this.props.Color}`}>{this.props.Personal.Nombre}</li>
+                        	<li className={`list-group-item`} style={{ background:this.props.Color}}>{this.props.Personal.Nombre}</li>
 					
 		);
 	}

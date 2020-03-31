@@ -54,7 +54,7 @@ export const	Mutation={
 	},
 	DeleteTickets:(root,{id})=>{
 		return new Promise((resolve,object)=>{
-			console.log(id)
+			// console.log(id)
 			tickets.findByIdAndUpdate({_id:id},{"$set":{"Eliminado":1}},(error,data)=>{
 				if(error) rejects(error);
 				else resolve('Se al eliminado correctamente el Personal')
@@ -68,7 +68,7 @@ export const	Mutation={
 		const {Nombre}=input
 		const existe = await personales.findOne({ Nombre });
 
-		 console.log(input)
+		//  console.log(input)
 		if (existe) {
 			throw new Error('El Personal ya existe');
 		}
@@ -102,7 +102,7 @@ export const	Mutation={
 	},
 	DeletePersonal:(root,{id})=>{
 		return new Promise((resolve,object)=>{
-			console.log(id)
+			// console.log(id)
 			personales.findByIdAndUpdate({_id:id},{"$set":{"Eliminado":1}},(error,data)=>{
 				if(error) rejects(error);
 				else resolve('Se al eliminado correctamente el Personal')
@@ -114,7 +114,7 @@ export const	Mutation={
 		const {Nombre}=input
 		const existe = await estados.findOne({ Nombre });
 
-		 console.log(input)
+		//  console.log(input)
 		if (existe) {
 			throw new Error('El Estado ya existe');
 		}
@@ -122,7 +122,7 @@ export const	Mutation={
 		const Save_Data = new estados({				
 			Nombre:input.Nombre,
 			Descripcion:input.Descripcion,
-			color:input.color,
+			Color:input.Color,
 			Eliminado:0
 		})
 
@@ -148,7 +148,7 @@ export const	Mutation={
 	},
 	DeleteEstado:(root,{id})=>{
 		return new Promise((resolve,object)=>{
-			console.log(id)
+			// console.log(id)
 			estados.findByIdAndUpdate({_id:id},{"$set":{"Eliminado":1}},(error,data)=>{
 				if(error) rejects(error);
 				else resolve('Se al eliminado correctamente el Estado')

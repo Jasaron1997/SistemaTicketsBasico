@@ -1,5 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+
+import { Query } from 'react-apollo';
+import { GETESTADOS } from '../../GraphQL/querry/estados';
 
 class navbar extends Component {
 	state = {};
@@ -50,9 +53,11 @@ class navbar extends Component {
 								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 									<Link to='/ticket/crear' className="dropdown-item">Ticket</Link>
 									<div className="dropdown-divider" />
-									<h5 className="dropdown-item">Personal</h5>
+									<Link to='/estado/crear' className="dropdown-item">Estado</Link>
 									<div className="dropdown-divider" />
-									<h5 className="dropdown-item">Dependencia</h5>
+									<Link to='/personal/crear' className="dropdown-item">Personal</Link>
+									<div className="dropdown-divider" />
+									<Link to='/dependencia/crear' className="dropdown-item">Dependencia</Link>
 								</div>
 							</div>
 						</li>
@@ -70,10 +75,19 @@ class navbar extends Component {
 									Estado
 								</button>
 								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-									<h5 className="dropdown-item">Realizado</h5>
-									<h5 className="dropdown-item">En Proceso</h5>
-									<div className="dropdown-divider" />
-									<h5 className="dropdown-item">Anulado</h5>
+									
+									<Query query={GETESTADOS}>
+									{({ loading, error, data, refetch }) => {
+										refetch();
+										if (loading) return 'Cargando...';
+										if (error) return `Error: ${error.message}`;
+										return (
+											<Fragment>
+												{data.getEstados.map((item) => <h5 className="dropdown-item text-white" style={{ background:item.Color}} >{item.Nombre}</h5>)}
+											</Fragment>
+										);
+									}}
+								</Query>
 								</div>
 							</div>
 						</li>
