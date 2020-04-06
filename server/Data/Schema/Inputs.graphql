@@ -1,3 +1,7 @@
+input DependenciasInput {
+    Nombre:String
+    Eliminado: Int
+}
 
 input TicketsInput {
 id: ID

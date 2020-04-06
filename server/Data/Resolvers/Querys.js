@@ -3,16 +3,25 @@ import { rejects } from 'assert';
 import bcrypt from 'bcrypt';
 const ObjectId = mongoose.Types.ObjectId;
 
-import { personales, estados, tickets } from '../Conexion/db';
+import { personales, estados, tickets, dependencias } from '../Conexion/db';
 
 //Generando token
 import dotenv from 'dotenv';
 dotenv.config({ path: 'variables.env' });
 
 export const Query = {
-	getTickets: (root, {}) => {
+	getTickets: (root, {Estado}) => {
+		let filters = {};
+		if (Estado != null && !!Estado) {
+			filters = {
+				"Estado.id":Estado
+			};
+		}
+
+console.log(filters)
+
 		return new Promise((resolve, object) => {
-			tickets.find({}, (error, data) => {
+			tickets.find(filters, (error, data) => {
 				if (error) rejects(error);
 				else resolve(data);
 			});
@@ -68,5 +77,13 @@ export const Query = {
 				else resolve(data);
 			});
 		});
-	}
+	},
+	getDependencias: (root, {}) => {
+		return new Promise((resolve, object) => {
+			dependencias.find({ Eliminado: 0 }, (error, data) => {
+				if (error) rejects(error);
+				else resolve(data);
+			});
+		});
+	},
 };

@@ -28,6 +28,13 @@ const ticketsSchema = new Schema({
     Finalizado: Date
 
 });
+
+
+const dependenciasSchema = new Schema({
+	Nombre: String,
+    Eliminado: Number
+});
+
 const personalesSchema = new Schema({
 	Nombre: String,
 	Dependencia: String,
@@ -44,6 +51,7 @@ const estadosSchema=new Schema ({
 })
 
 
+const dependencias  = model('dependencias', dependenciasSchema);
 const personales = model('personales', personalesSchema);
  const estados = model('estados', estadosSchema);
  const tickets = model('tickets', ticketsSchema);
@@ -51,4 +59,4 @@ const personales = model('personales', personalesSchema);
 
 
 
-export { personales,estados,tickets};
+export { personales,estados,tickets,dependencias};

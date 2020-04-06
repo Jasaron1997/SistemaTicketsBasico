@@ -16,6 +16,8 @@ class ticket extends Component {
 		this.setState({
 			[name]: value
 		});
+		console.log(this.state.fecha)
+		console.log("2018-06-12T19:30")
 	};
 
 	CreatePersonal = (e, CreatePersonal) => {
@@ -50,7 +52,7 @@ return(
 					<div class="form-row">
 						<div class="form-group col-md-4">
 							<label>Fecha Solicitud</label>
-							<input name="FechaSolicitud" onChange={this.UpdateState} type="datetime-local" class="form-control" />
+							<input name="FechaSolicitud" onChange={this.UpdateState} type="datetime-local" class="form-control"/>
 						</div>
 						<div class="form-group col-md-4">
 							<label>Fecha Inicio</label>
@@ -72,9 +74,7 @@ return(
 								<option selected>Seleccionar...</option>
 								<Query
 									query={GETPERSONALES}
-									variables={{
-										tareas: 1
-									}}
+							
 								>
 									{({ loading, error, data, refetch }) => {
 										refetch();
@@ -82,7 +82,7 @@ return(
 										if (error) return `Error: ${error.message}`;
 										return (
 											<Fragment>
-												{data.getPersonales.map((item) => <option value={item.id}>{item.Nombre}</option>)}
+												{data.getPersonales.map((item) => <option value={item.id}>{`${item.Nombre} (${item.Dependencia})`}</option>)}
 											</Fragment>
 										);
 									}}
@@ -93,14 +93,14 @@ return(
 							<label for="inputZip">Realizado</label>
 							<select  name="Realizado" onChange={this.UpdateState} class="form-control">
 								<option selected>Seleccionar...</option>
-								<Query query={GETPERSONALES}>
+								<Query query={GETPERSONALES} variables={{tareas:1}}>
 									{({ loading, error, data, refetch }) => {
 										refetch();
 										if (loading) return 'Cargando...';
 										if (error) return `Error: ${error.message}`;
 										return (
 											<Fragment>
-												{data.getPersonales.map((item) => <option value={item.id}>{item.Nombre}</option>)}
+												{data.getPersonales.map((item) => <option value={item.id}>{`${item.Nombre} (${item.Dependencia})`}</option>)}
 											</Fragment>
 										);
 									}}
@@ -118,7 +118,7 @@ return(
 										if (error) return `Error: ${error.message}`;
 										return (
 											<Fragment>
-												{data.getEstados.map((item) => <option value={item.id}>{item.Nombre}</option>)}
+												{data.getEstados.map((item) => <option value={item.id}>{`${item.Nombre}`}</option>)}
 											</Fragment>
 										);
 									}}

@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const GETTICKETS = gql`
-	query getTickets {
-		getTickets {
+	query getTickets($Estado:String) {
+		getTickets(Estado:$Estado) {
 			id
 			Actividad
 			Ticket

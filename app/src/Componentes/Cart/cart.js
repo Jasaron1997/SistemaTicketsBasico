@@ -14,10 +14,11 @@ class cart extends Component {
 				<Query
 					query={GETTICKETS}
 					//   pollInterval={500} // ESTO ES PARA EL CACHING, 500 ES IGUAL A MEDIO SEGUNDO
-					// variables={{
-					// 	limite: this.limite,
-					// 	offset: this.state.paginador.offset
-					// }}
+					variables={{
+						// limite: this.limite,
+						// offset: this.state.paginador.offset
+						Estado:this.props.State
+					}}
 				>
 					{({
 						loading,

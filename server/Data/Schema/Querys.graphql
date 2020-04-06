@@ -1,10 +1,11 @@
 type Query {
   
-   getTickets:[Tickets]
+   getTickets(Estado:String):[Tickets]
 
   getTicket(id:ID):Tickets
 
-  
+  getDependencias:[Dependencias]
+
   getPersonales(tareas:Int):[Personales]
 
   getPersonal(id:ID):Personales

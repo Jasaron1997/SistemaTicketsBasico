@@ -1,3 +1,7 @@
+type Dependencias {
+    Nombre:String
+    Eliminado: Int
+}
 
 type Tickets {
    id: ID
@@ -17,17 +21,16 @@ Finalizado: String
 type Personales {
     id: ID
     Nombre: String
-	  Dependencia: String
-	  RealizarTareas:Int
+    Dependencia: String
+	RealizarTareas:Int
     Eliminado: Int
-   
 }
 
 type Estados {
     id: ID
     Nombre: String
     Descripcion: String
-	  Color: String
+	Color: String
     Eliminado: Int
 }
 

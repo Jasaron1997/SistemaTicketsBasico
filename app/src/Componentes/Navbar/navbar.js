@@ -6,12 +6,20 @@ import { GETESTADOS } from '../../GraphQL/querry/estados';
 
 class navbar extends Component {
 	state = {};
+	UpdateState =()=>{
+		alert("datos")
+	}
+	BuscarDatos=(e)=>{
+		e.preventDefault();
+		
+	}
+
 	render() {
 		return (
 			<nav className=" navbar  navbar-expand-lg navbar-dark bg-dark">
-				<h4 to="/" className="navbar-brand">
+				<Link to="/" className="navbar-brand">
 					TMS
-				</h4>
+				</Link>
 				<button
 					className="navbar-toggler"
 					type="button"
@@ -26,17 +34,18 @@ class navbar extends Component {
 
 				<div className="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul className="navbar-nav mr-auto">
-						<li className="nav-item active">
+						{/* <li className="nav-item active">
 							<h5 className="nav-link">
 								Home <span className="sr-only">(current)</span>
 							</h5>
+						</li> */}
+						<li className="nav-item ">
+							<Link to='/' className="nav-link">Tarjeta</Link>
 						</li>
 						<li className="nav-item">
-							<h5 className="nav-link">Listado</h5>
+							<Link  to='/listado' className="nav-link">Listado</Link>
 						</li>
-						<li className="nav-item">
-							<h5 className="nav-link">Tarjeta</h5>
-						</li>
+					
 
 						<li className="nav-item dropdown">
 							<div class="dropdown">
@@ -75,7 +84,7 @@ class navbar extends Component {
 									Estado
 								</button>
 								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-									
+								<h5 className="dropdown-item" onClick={this.props.UpdateState(null)}>Todos</h5>
 									<Query query={GETESTADOS}>
 									{({ loading, error, data, refetch }) => {
 										refetch();
@@ -83,7 +92,7 @@ class navbar extends Component {
 										if (error) return `Error: ${error.message}`;
 										return (
 											<Fragment>
-												{data.getEstados.map((item) => <h5 className="dropdown-item text-white" style={{ background:item.Color}} >{item.Nombre}</h5>)}
+												{data.getEstados.map((item) => <h5 className="dropdown-item text-white" onClick={this.props.UpdateState(item.id)} style={{ background:item.Color}} >{item.Nombre}</h5>)}
 											</Fragment>
 										);
 									}}
@@ -95,7 +104,7 @@ class navbar extends Component {
                   <h5 className="nav-link disabled" tabindex="-1" aria-disabled="true">Disabled</h5>
                 </li> */}
 					</ul>
-					<form className="form-inline my-2 my-lg-0">
+					<form className="form-inline my-2 my-lg-0"  onSubmit={this.BuscarDatos}>
 						<input
 							className="form-control mr-sm-2"
 							type="search"

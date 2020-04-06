@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import {personales,estados,tickets} from '../Conexion/db';
+import {personales,estados,tickets,dependencias} from '../Conexion/db';
 import { rejects } from 'assert';
 import bcrypt from 'bcrypt';
 const ObjectId=mongoose.Types.ObjectId;
@@ -17,12 +17,14 @@ const crearToken = (usuarioLogin, secreto, expiresIn) => {
 
 export const	Mutation={
 
-	CreateTickets: (root, { input }) => {
-	
+	CreateTickets:async (root, { input }) => {
+
+		const count = await tickets.count({});
+
 
 		const Save_Data = new tickets({				
 				Actividad:input.Actividad,
-				Ticket:input.Ticket,
+				Ticket:count+1,
 				FechaSolicitud:input.FechaSolicitud,
 				FechaIncio:input.FechaIncio,
 				Observaciones:input.Observaciones,
@@ -61,8 +63,6 @@ export const	Mutation={
 			})
 		}) 
 	},
-
-
 
 	CreatePersonal:async (root, { input }) => {
 		const {Nombre}=input
@@ -150,6 +150,50 @@ export const	Mutation={
 		return new Promise((resolve,object)=>{
 			// console.log(id)
 			estados.findByIdAndUpdate({_id:id},{"$set":{"Eliminado":1}},(error,data)=>{
+				if(error) rejects(error);
+				else resolve('Se al eliminado correctamente el Estado')
+			})
+		}) 
+	},
+
+	CreateDependencias:async (root, { input }) => {
+		const {Nombre}=input
+		const existe = await dependencias.findOne({ Nombre });
+
+		//  console.log(input)
+		if (existe) {
+			throw new Error('El Estado ya existe');
+		}
+
+		const Save_Data = new dependencias({				
+			Nombre:input.Nombre,
+			Eliminado:0
+		})
+
+		// return(`El Usuario fue creado con exito`)
+		
+		Save_Data.id = Save_Data._id;
+
+		return new Promise((resolve, object) => {
+			Save_Data.save((error) => {
+				if (error) rejects(error);
+				else resolve(Save_Data);
+			});
+		});
+	},
+	
+	UpdateDependencias: (root, { input }) => {
+		return new Promise((resolve, object) => {
+			dependencias.findByIdAndUpdate({ _id: input.id }, input, { new: true }, (error, data) => {
+				if (error) rejects(error);
+				else resolve(data);
+			});
+		});
+	},
+	DeleteDependencias:(root,{id})=>{
+		return new Promise((resolve,object)=>{
+			// console.log(id)
+			dependencias.findByIdAndUpdate({_id:id},{"$set":{"Eliminado":1}},(error,data)=>{
 				if(error) rejects(error);
 				else resolve('Se al eliminado correctamente el Estado')
 			})

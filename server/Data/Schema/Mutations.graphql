@@ -11,4 +11,9 @@ DeletePersonal(id:ID):String
 CreateEstado(input:EstadosInput):Estados
 UpdateEstado(input:EstadosInput):Estados
 DeleteEstado(id:ID):String
+
+CreateDependencias(input:DependenciasInput):Dependencias
+UpdateDependencias(input:DependenciasInput):Dependencias
+DeleteDependencias(id:ID):String
+
 }
