@@ -16,8 +16,7 @@ class ticket extends Component {
 		this.setState({
 			[name]: value
 		});
-		console.log(this.state.fecha)
-		console.log("2018-06-12T19:30")
+	
 	};
 
 	CreatePersonal = (e, CreatePersonal) => {

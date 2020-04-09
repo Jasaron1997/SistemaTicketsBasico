@@ -46,14 +46,18 @@ class listado extends Component {
 							refetch();
 							if (loading) return 'Cargando...';
 							if (error) return `Error: ${error.message}`;
+
+							const patt =  new RegExp(`${this.props.Datas}`,'gi');
+							const datos=data.getTickets.filter(dat=>patt.exec(dat.Actividad)   );
 							return (
 								<Fragment>
-									{data.getTickets.map((item) => {
+									{datos.map((item) => {
 										const { id } = item;
 
 										return (
 											<Contenido
 												key={id}
+												id={item.id}
 												Actividad={item.Actividad}
 												Ticket={item.Ticket}
 												FechaSolicitud={item.FechaSolicitud}

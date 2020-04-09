@@ -6,13 +6,12 @@ import { GETESTADOS } from '../../GraphQL/querry/estados';
 
 class navbar extends Component {
 	state = {};
-	UpdateState =()=>{
-		alert("datos")
-	}
-	BuscarDatos=(e)=>{
-		e.preventDefault();
-		
-	}
+	UpdateState = (e) => {
+		const { name, value } = e.target;
+		this.setState({
+			[name]: value
+		});
+	};
 
 	render() {
 		return (
@@ -40,12 +39,15 @@ class navbar extends Component {
 							</h5>
 						</li> */}
 						<li className="nav-item ">
-							<Link to='/' className="nav-link">Tarjeta</Link>
+							<Link to="/" className="nav-link">
+								Tarjeta
+							</Link>
 						</li>
 						<li className="nav-item">
-							<Link  to='/listado' className="nav-link">Listado</Link>
+							<Link to="/listado" className="nav-link">
+								Listado
+							</Link>
 						</li>
-					
 
 						<li className="nav-item dropdown">
 							<div class="dropdown">
@@ -60,13 +62,21 @@ class navbar extends Component {
 									Crear
 								</button>
 								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-									<Link to='/ticket/crear' className="dropdown-item">Ticket</Link>
+									<Link to="/ticket/crear" className="dropdown-item">
+										Ticket
+									</Link>
 									<div className="dropdown-divider" />
-									<Link to='/estado/crear' className="dropdown-item">Estado</Link>
+									<Link to="/estado/crear" className="dropdown-item">
+										Estado
+									</Link>
 									<div className="dropdown-divider" />
-									<Link to='/personal/crear' className="dropdown-item">Personal</Link>
+									<Link to="/personal/crear" className="dropdown-item">
+										Personal
+									</Link>
 									<div className="dropdown-divider" />
-									<Link to='/dependencia/crear' className="dropdown-item">Dependencia</Link>
+									<Link to="/dependencia/crear" className="dropdown-item">
+										Dependencia
+									</Link>
 								</div>
 							</div>
 						</li>
@@ -84,19 +94,29 @@ class navbar extends Component {
 									Estado
 								</button>
 								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								<h5 className="dropdown-item" onClick={this.props.UpdateState(null)}>Todos</h5>
+									<h5 className="dropdown-item" onClick={this.props.UpdateState(null)}>
+										Todos
+									</h5>
 									<Query query={GETESTADOS}>
-									{({ loading, error, data, refetch }) => {
-										refetch();
-										if (loading) return 'Cargando...';
-										if (error) return `Error: ${error.message}`;
-										return (
-											<Fragment>
-												{data.getEstados.map((item) => <h5 className="dropdown-item text-white" onClick={this.props.UpdateState(item.id)} style={{ background:item.Color}} >{item.Nombre}</h5>)}
-											</Fragment>
-										);
-									}}
-								</Query>
+										{({ loading, error, data, refetch }) => {
+											refetch();
+											if (loading) return 'Cargando...';
+											if (error) return `Error: ${error.message}`;
+											return (
+												<Fragment>
+													{data.getEstados.map((item) => (
+														<h5
+															className="dropdown-item text-white"
+															onClick={this.props.UpdateState(item.id)}
+															style={{ background: item.Color }}
+														>
+															{item.Nombre}
+														</h5>
+													))}
+												</Fragment>
+											);
+										}}
+									</Query>
 								</div>
 							</div>
 						</li>
@@ -104,15 +124,17 @@ class navbar extends Component {
                   <h5 className="nav-link disabled" tabindex="-1" aria-disabled="true">Disabled</h5>
                 </li> */}
 					</ul>
-					<form className="form-inline my-2 my-lg-0"  onSubmit={this.BuscarDatos}>
+					<form className="form-inline my-2 my-lg-0" onSubmit={this.props.BuscarDatos(this.state.buscador)}>
 						<input
 							className="form-control mr-sm-2"
 							type="search"
-							placeholder="Search"
+							placeholder="Buscar"
 							aria-label="Search"
+							name={'buscador'}
+							onChange={this.UpdateState}
 						/>
 						<button className="btn btn-outline-success my-2 my-sm-0" type="submit">
-							Search
+						Buscar
 						</button>
 					</form>
 				</div>

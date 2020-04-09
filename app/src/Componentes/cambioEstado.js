@@ -1,20 +1,15 @@
 import React, { Component,Fragment } from 'react';
 import {withRouter} from 'react-router-dom';
 
-
-import Moment from 'react-moment';
-
-import Portal from '../../portal';
-
-import Personal from './personal';
-
+import Portal from '../portal';
 import { Query, Mutation } from 'react-apollo';
-import { UPDATETICKETS } from '../../GraphQL/mutation/tikects';
+import { UPDATETICKETS } from '../GraphQL/mutation/tikects';
 
-import { GETPERSONALES } from '../../GraphQL/querry/personales';
-import { GETESTADOS } from '../../GraphQL/querry/estados';
+import { GETPERSONALES } from '../GraphQL/querry/personales';
+import { GETESTADOS } from '../GraphQL/querry/estados';
 
-class contenido extends Component {
+
+class cambioEstado extends Component {
 	state = {};
 
 	UpdateState = (e) => {
@@ -70,24 +65,24 @@ class contenido extends Component {
 
 					<form  onSubmit={e=>this.UpdateTickets(e,UpdateTickets)}>
 						<div
-							class="modal fade"
-							id={`exampleModal${this.props.id}`} 
+							class="p fade"
+							id={`examplep`} 
 							tabindex="-1"
 							role="dialog"
-							aria-labelledby="exampleModalLabel"
+							aria-labelledby="examplepLabel"
 							aria-hidden="true"
 						>
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel">
+							<div class="p-dialog" role="document">
+								<div class="p-content">
+									<div class="p-header">
+										<h5 class="p-title" id="examplepLabel">
 											Cambio de Estado
 										</h5>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<button type="button" class="close" data-dismiss="p" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
 									</div>
-									<div class="modal-body">
+									<div class="p-body">
 										<div class="form-group">
 											<label>Fecha Inicio</label>
 											<input
@@ -171,8 +166,8 @@ class contenido extends Component {
 											</div>
 										</div>
 									</div>{' '}
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-dismiss="modal">
+									<div class="p-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="p">
 											Cerrar
 										</button>
 										<button type="submit" class="btn btn-primary" >
@@ -194,73 +189,14 @@ class contenido extends Component {
 	);
 	};
 	render() {
-		const {
-			Actividad,
-			Ticket,
-			FechaSolicitud,
-			FechaInicio,
-			Observaciones,
-			Estado,
-			Finalizado,
-			Reportado,
-			Realizado
-		} = this.props;
-		const { Color } = this.props.Estado[0];
+		
 		return (
-
-
-			<div className="col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
-				<div className={`card text-white mb-3`} style={{ background: Color }}>
-					<div className="card-header">
-						T-{Ticket} {Estado[0].Nombre}
-					</div>
-					<div className="card-body">
-						<h5 className="card-title">{Actividad}</h5>
-						<p className="card-text">{Observaciones}</p>
-						<ul className="list-group list-group-flush">
-							<li className={`list-group-item `} style={{ background: Color }}>
-								{'Solicitud: '}
-								<Moment format="DD/MM/YYYY HH:mm">
-									{new Date(Number(FechaSolicitud)).toISOString()}
-								</Moment>
-							</li>
-							<li className={`list-group-item`} style={{ background: Color }}>
-								{`Inicio: `}
-								<Moment format="DD/MM/YYYY HH:mm">{new Date(Number(FechaInicio)).toISOString()}</Moment>
-							</li>
-							<li className={`list-group-item`} style={{ background: Color }}>
-								{`Finalizado: `}
-								<Moment format="DD/MM/YYYY HH:mm">{new Date(Number(Finalizado)).toISOString()}</Moment>
-							</li>
-						</ul>
-						<p className="card-text">Fechas</p>
-
-						<ul className="list-group list-group-flush">
-							{Reportado.map((data, index) => <Personal key={index} Personal={data} Color={Color} />)}
-						</ul>
-						<p className="card-text">Reportado</p>
-
-						<ul class="list-group list-group-flush">
-							{Realizado.map((data, index) => <Personal key={index} Personal={data} Color={Color} />)}
-						</ul>
-						<p className="card-text">Realizado</p>
-
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target={`#exampleModal${this.props.id}`} >
-							Cambiar Estado
-						</button>
-
+<Fragment>
+			
 						{this.ShowPortar()}
-					</div>
-					<div className="card-footer">
-						<small className="text-muted-white ">
-							{`Tiempo Abierto: `}
-							<Moment format="DD/MM/YYYY HH:mm">{new Date(Number(Finalizado)).toISOString()}</Moment>
-						</small>
-					</div>
-				</div>
-			</div>
+						</Fragment>
 		);
 	}
 }
 
-export default withRouter(contenido);
+export default withRouter(cambioEstado);

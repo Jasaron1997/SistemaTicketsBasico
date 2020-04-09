@@ -48,6 +48,7 @@ export const	Mutation={
 	
 	UpdateTickets: (root, { input }) => {
 		return new Promise((resolve, object) => {
+			console.log(input)
 			tickets.findOneAndUpdate({ _id: input.id }, input, { new: true }, (error, data) => {
 				if (error) rejects(error);
 				else resolve(data);

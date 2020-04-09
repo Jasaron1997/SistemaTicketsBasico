@@ -21,12 +21,44 @@ export const CREATETICKETS = gql`
 				Dependencia
 				RealizarTareas
 			}
-			Estado{
-      id
-      Nombre
-      Descripcion
-      Color
-    }
+			Estado {
+				id
+				Nombre
+				Descripcion
+				Color
+			}
+			Finalizado
+		}
+	}
+`;
+
+export const UPDATETICKETS = gql`
+	mutation UpdateTickets($input: TicketsInput) {
+		UpdateTickets(input: $input) {
+			id
+			Actividad
+			Ticket
+			FechaSolicitud
+			FechaInicio
+			Observaciones
+			Reportado {
+				id
+				Nombre
+				Dependencia
+				RealizarTareas
+			}
+			Realizado {
+				id
+				Nombre
+				Dependencia
+				RealizarTareas
+			}
+			Estado {
+				id
+				Nombre
+				Descripcion
+				Color
+			}
 			Finalizado
 		}
 	}

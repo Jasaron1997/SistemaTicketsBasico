@@ -10,6 +10,9 @@ const db=['nuebe',
 mongoose.Promise = global.Promise;
 mongoose.connect(db[1], { useNewUrlParser: true });
 
+mongoose.set('useFindAndModify', false);
+mongoose.set('useUnifiedTopology', true);
+
 // mongoose.set('setFindAndModify', false);
 
 // definir el schema de clientes mongoose.Types.ObjectId
