@@ -1,6 +1,9 @@
 import React, { Component,Fragment } from 'react';
 import {withRouter} from 'react-router-dom';
 
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
 
 import Moment from 'react-moment';
 
@@ -90,23 +93,42 @@ class contenido extends Component {
 									<div class="modal-body">
 										<div class="form-group">
 											<label>Fecha Inicio</label>
-											<input
+											{/* <input
 												name="FechaInicio"
 												onChange={this.UpdateState}
 												type="datetime-local"
 												class="form-control"
 												// defaultValue={	<Moment format="DD/MM/YYYY HH:mm">{new Date(Number(this.state.FechaInicio)).toISOString()}</Moment>}
 
+											/> */}
+											<DatePicker
+												selected={new Date(Number(this.props.FechaInicio))}
+												onChange={(date) =>
+													this.setState({
+														FechaInicio: date
+													})}
+												showTimeSelect
+												timeFormat="HH:mm"
+												timeIntervals={1}
+												timeCaption="time"
+												dateFormat="MMMM d, yyyy HH:mm"
+												className="form-control"
 											/>
 										</div>
 										<div class="form-group">
 											<label>Fecha de Finalización</label>
-											<input
-												name="Finalizado"
-												onChange={this.UpdateState}
-												type="datetime-local"
-												class="form-control"
-												// defaultValue={	<Moment format="DD/MM/YYYY HH:mm">{new Date(Number(this.state.Finalizado)).toISOString()}</Moment>}
+											<DatePicker
+												selected={new Date(Number(this.props.Finalizado))}
+												onChange={(date) =>
+													this.setState({
+														Finalizado: date
+													})}
+												showTimeSelect
+												timeFormat="HH:mm"
+												timeIntervals={1}
+												timeCaption="time"
+												dateFormat="MMMM d, yyyy HH:mm"
+												className="form-control"
 											/>
 										</div>
 										<div class="form-group">

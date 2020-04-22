@@ -1,6 +1,8 @@
 import React, { Component,Fragment } from 'react';
 import {withRouter} from 'react-router-dom';
 
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 import Moment from 'react-moment';
 
@@ -15,7 +17,8 @@ import { GETPERSONALES } from '../../GraphQL/querry/personales';
 import { GETESTADOS } from '../../GraphQL/querry/estados';
 
 class contenido extends Component {
-	state = {};
+	state = {
+	};
 
 	UpdateState = (e) => {
 		const { name, value } = e.target;
@@ -34,7 +37,7 @@ class contenido extends Component {
 	}	
 	
 	ShowPortar = () => {
-
+		
 		const {id,
 			Actividad,
 			Ticket,
@@ -90,23 +93,42 @@ class contenido extends Component {
 									<div class="modal-body">
 										<div class="form-group">
 											<label>Fecha Inicio</label>
-											<input
+											{/* <input
 												name="FechaInicio"
 												onChange={this.UpdateState}
 												type="datetime-local"
 												class="form-control"
 												// defaultValue={	<Moment format="DD/MM/YYYY HH:mm">{new Date(Number(this.state.FechaInicio)).toISOString()}</Moment>}
 
+											/> */}
+											<DatePicker
+												selected={new Date(Number(this.props.FechaInicio))}
+												onChange={(date) =>
+													this.setState({
+														FechaInicio: date
+													})}
+												showTimeSelect
+												timeFormat="HH:mm"
+												timeIntervals={1}
+												timeCaption="time"
+												dateFormat="MMMM d, yyyy HH:mm"
+												className="form-control"
 											/>
 										</div>
 										<div class="form-group">
 											<label>Fecha de Finalización</label>
-											<input
-												name="Finalizado"
-												onChange={this.UpdateState}
-												type="datetime-local"
-												class="form-control"
-												// defaultValue={	<Moment format="DD/MM/YYYY HH:mm">{new Date(Number(this.state.Finalizado)).toISOString()}</Moment>}
+											<DatePicker
+												selected={new Date(Number(this.props.Finalizado))}
+												onChange={(date) =>
+													this.setState({
+														Finalizado: date
+													})}
+												showTimeSelect
+												timeFormat="HH:mm"
+												timeIntervals={1}
+												timeCaption="time"
+												dateFormat="MMMM d, yyyy HH:mm"
+												className="form-control"
 											/>
 										</div>
 										<div class="form-group">
@@ -138,6 +160,13 @@ class contenido extends Component {
 																<Fragment>
 																	{data.getPersonales.map((item) => (
 																		<option
+																			key={item.id}
+																		selected={
+																							this.props.Realizado[0].Nombre ===
+																							item.Nombre
+																						}
+
+
 																			value={item.id}
 																		>{`${item.Nombre} (${item.Dependencia})`}</option>
 																	))}
@@ -160,6 +189,12 @@ class contenido extends Component {
 																<Fragment>
 																	{data.getEstados.map((item) => (
 																		<option
+																		key={item.id}
+																		selected={
+																							this.props.Estado[0].Nombre ===
+																							item.Nombre
+																						}
+
 																			value={item.id}
 																		>{`${item.Nombre}`}</option>
 																	))}
@@ -194,6 +229,10 @@ class contenido extends Component {
 	);
 	};
 	render() {
+		console.log(new Date(Number(this.props.FechaInicio)))
+		console.log(this.props.FechaInicio)
+
+console.log(this.state.FechaInicio)
 		const {
 			Actividad,
 			Ticket,
@@ -205,6 +244,9 @@ class contenido extends Component {
 			Reportado,
 			Realizado
 		} = this.props;
+	
+	
+
 		const { Color } = this.props.Estado[0];
 		return (
 
